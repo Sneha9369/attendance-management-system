@@ -1,90 +1,130 @@
 # 🎓 Attendance Management System (AMS)
 
-## 📌 Introduction
-
-The Attendance Management System (AMS) is a web-based application developed using Flask (Python) that helps educational institutions manage student attendance, marks, and performance efficiently. The system provides separate dashboards for Admin, Teacher, and Student roles.
-
-This project aims to digitize traditional attendance systems and provide real-time insights into student performance.
+<p align="center">
+  <b>A Smart Web-Based System to Manage Attendance, Marks & Student Performance</b>
+</p>
 
 ---
 
-## 🎯 Objectives
+## 📌 Overview
 
-- Automate attendance tracking
-- Provide subject-wise attendance insights
-- Allow teachers to manage student marks
-- Enable students to view performance and attendance
-- Maintain organized academic records
+The **Attendance Management System (AMS)** is a Flask-based web application designed to simplify and digitize academic record management.  
+
+It provides separate dashboards for **Admin, Teacher, and Student**, enabling efficient handling of attendance, marks, and performance analysis.
+
+---
+
+## ✨ Key Features
+
+- 🔐 Role-based Login System (Admin / Teacher / Student)
+- 📅 Attendance Tracking System
+- 📊 Marks & Performance Management
+- 🧑‍🏫 Teacher Subject Handling
+- 📁 Image Upload Support
+- 📈 Student Dashboard with Insights
+- 🔎 Search & Report System
 
 ---
 
 ## 🏗️ System Modules
 
 ### 👨‍💼 Admin Panel
-- Add/Edit/Delete Students
-- Add/Edit/Delete Teachers
+- Manage Students & Teachers
 - View Reports
-- Manage Attendance
+- Control System Data
 
 ### 👩‍🏫 Teacher Panel
 - Take Attendance
 - Add Marks
 - View Students
-- Manage Subjects
 
 ### 🎓 Student Panel
 - View Attendance %
-- View Marks
-- Performance Dashboard
-- Personal Profile
+- Check Marks
+- Track Performance
 
 ---
 
-## ⚙️ Technologies Used
+## ⚙️ Tech Stack
 
-| Technology | Description |
-|----------|------------|
-| Python | Backend logic |
-| Flask | Web framework |
-| SQLite | Database |
-| HTML/CSS | Frontend |
-| JavaScript | Dynamic UI |
+- **Backend:** Python (Flask)
+- **Database:** SQLite
+- **Frontend:** HTML, CSS, JavaScript
 
 ---
 
-## 🗄️ Database Structure
+## 📂 Project Structure
 
-The system uses SQLite database with the following tables:
+AMS/
+│
+├── app.py
+├── database.py
+├── train.py
+├── recognize.py
+├── register.py
+├── README.md
+├── .gitignore
+│
+├── static/
+│ ├── style.css
+│ ├── login.png
+│ ├── screenshots/
+│ │ ├── admin_dashboard.png
+│ │ ├── student_dashboard.png
+│ │ ├── teacher_dashboard.png
+│ │ ├── report.png
+│ │ └── manual_attendance.png
+│ └── uploads/ (ignored)
+│
+├── templates/
+│ ├── base.html
+│ ├── login.html
+│ ├── student_dashboard.html
+│ ├── teacher_dashboard.html
+│ ├── admin_dashboard.html
+│ ├── my_attendance.html
+│ ├── marks.html
+│ └── ...
+│
+├── attendance/
+│ └── attendance.csv
+│
+└── dataset/
 
-- `students`
-- `teachers`
-- `attendance`
-- `marks`
-
-Database is automatically created using `database.py`.
 
 ---
 
-## 🚀 How to Run the Project
+## 📸 Screenshots
 
-### 1️⃣ Clone Repository
+### 🔹 Admin Dashboard
+![Admin](static/screenshots/admin_dashboard.png)
+
+### 🔹 Student Dashboard
+![Student](static/screenshots/student_dashboard.png)
+
+### 🔹 Teacher Dashboard
+![Teacher](static/screenshots/teacher_dashboard.png)
+
+### 🔹 Attendance System
+![Attendance](static/screenshots/manual_attendance.png)
+
+### 🔹 Reports
+![Report](static/screenshots/report.png)
+
+---
+
+## 🚀 How to Run
+
 ```bash
-git clone https://github.com/your-username/your-repo.git
-cd your-repo
+# Clone repo
+git clone https://github.com/Sneha9369/attendance-management-system.git
+cd attendance-management-system
 
-#=============== IMPORTANT===============
-“Run database.py before running app.py”
-
-2️⃣ Install Dependencies
+# Install dependencies
 pip install flask
-3️⃣ Create Database
-python database.py
-4️⃣ Run Application
-python app.py
 
-2️⃣ Install Dependencies
-pip install flask
-3️⃣ Create Database
+# Create database
 python database.py
-4️⃣ Run Application
+
+# Run app
 python app.py
