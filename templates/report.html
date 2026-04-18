@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Attendance Report 📊</h2>
+
+<div class="card">
+
+<!-- FILTER -->
+<form method="get">
+
+<select name="course">
+<option value="All">All</option>
+<option value="BTECH">BTECH</option>
+<option value="BCA">BCA</option>
+</select>
+
+<select name="dept">
+<option value="All">All</option>
+<option>Computer Science</option>
+<option>Data Science</option>
+<option>Artificial Intelligence</option>
+</select>
+
+<button type="submit">Filter</button>
+
+</form>
+
+</div>
+
+<br>
+
+<div class="card">
+
+<table>
+
+<tr>
+<th>Roll No</th>
+<th>Name</th>
+<th>Course</th>
+<th>Department</th>
+<th>Attendance %</th>
+</tr>
+
+{% for s in data %}
+<tr>
+<td>{{ s[0] }}</td>
+<td>{{ s[1] }}</td>
+<td>{{ s[2] }}</td>
+<td>{{ s[3] }}</td>
+<td>{{ s[4] }}%</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
+{% endblock %}

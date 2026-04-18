@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Teacher Dashboard 👩‍🏫</h2>
+
+<!-- WELCOME CARD WITH PHOTO -->
+<div class="card" style="display:flex; align-items:center; gap:20px;">
+
+<img src="{{ url_for('static', filename='uploads/' + (teacher[5] or 'default.png')) }}"
+     style="width:80px; height:80px; border-radius:50%; object-fit:cover;">
+
+<div>
+<h3>Welcome, {{ teacher[1] }} 👋</h3>
+<p>Manage your students, attendance & marks easily</p>
+</div>
+
+</div>
+
+<br>
+
+<!-- STATS -->
+<div style="display:flex; gap:20px; flex-wrap:wrap;">
+
+<div class="card" style="flex:1;">
+<h3>👨‍🎓 Students</h3>
+<p>{{ students | default(0) }}</p>
+</div>
+
+<div class="card" style="flex:1;">
+<h3>📊 Marks</h3>
+<p>Upload Scores</p>
+</div>
+
+<div class="card" style="flex:1;">
+<h3>📅 Attendance</h3>
+<p>Track Daily</p>
+</div>
+
+</div>
+
+<br>
+
+<!-- ACTION BUTTONS -->
+<div class="card">
+
+<h3>Quick Actions 🚀</h3>
+
+<div style="display:flex; gap:15px; flex-wrap:wrap;">
+
+<a href="/view_students">
+<button>👨‍🎓 View Students</button>
+</a>
+
+<a href="/manual_attendance">
+<button>📅 Take Attendance</button>
+</a>
+
+<a href="/add_marks_page">
+<button>📊 Add Marks</button>
+</a>
+
+<a href="/teacher_profile">
+<button>👤 My Profile</button>
+</a>
+
+<a href="/add_marks">
+    <button>Add Marks 📊</button>
+</a>
+
+</div>
+
+</div>
+
+{% endblock %}

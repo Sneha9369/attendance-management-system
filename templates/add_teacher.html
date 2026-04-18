@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Add Teacher 👩‍🏫</h2>
+
+<div class="card">
+
+<form action="/add_teacher" method="post" enctype="multipart/form-data">
+
+<!-- COURSE -->
+<select id="course" name="course" onchange="loadDepartments()">
+<option value="">Select Course</option>
+<option value="BTECH">BTECH</option>
+<option value="BCA">BCA</option>
+</select>
+
+<!-- DEPARTMENT -->
+<select id="department" name="department" onchange="loadSubjects()">
+<option value="">Select Department</option>
+</select>
+
+<!-- SUBJECT -->
+<p>Select Subjects:</p>
+<div id="subjectsBox" class="subjects"></div>
+<br>
+
+<!-- DETAILS -->
+<input type="text" name="name" placeholder="Teacher Name" required>
+<input name="father_name" placeholder="Father Name">
+<input name="mother_name" placeholder="Mother Name">
+<input name="contact" placeholder="Contact">
+<input name="address" placeholder="Address">
+<input name="city" placeholder="City">
+<input name="state" placeholder="State">
+<input name="username" placeholder="Username" required>
+<input name="password" placeholder="Password" required>
+
+<input type="file" name="photo" required>
+
+<br><br>
+
+<button type="submit">Add Teacher</button>
+
+</form>
+
+</div>
+
+<!-- ✅ JS -->
+<script>
+const data = {
+"BTECH": {
+"CSE": [
+"Machine Learning Technique",
+"Software Engineering",
+"Software Project Management",
+"Computer Network",
+"Essence of Indian Traditional Knowledge",
+"Big Data Analytics"
+],
+"DS": [
+"Machine Learning Technique",
+"Software Engineering",
+"Software Project Management",
+"Computer Network",
+"Essence of Indian Traditional Knowledge",
+"Big Data Analytics"
+]
+},
+"BCA": {
+"AI": [
+"Artificial Intelligence",
+"Python",
+"Java",
+"Essence of Indian Traditional Knowledge",
+"Database Management System"
+],
+"DS": [
+"Data Science",
+"Python",
+"Java",
+"Essence of Indian Traditional Knowledge",
+"Database Management System"
+]
+}
+};
+</script>
+<script>
+function loadDepartments(){
+
+let course = document.getElementById("course").value;
+let dept = document.getElementById("department");
+let box = document.getElementById("subjectsBox");
+
+dept.innerHTML = '<option>Select Department</option>';
+box.innerHTML = "";
+
+if(data[course]){
+Object.keys(data[course]).forEach(d=>{
+let opt = document.createElement("option");
+opt.value = d;
+opt.text = d;
+dept.appendChild(opt);
+});
+}
+}
+
+function loadSubjects(){
+
+let course = document.getElementById("course").value;
+let dept = document.getElementById("department").value;
+let box = document.getElementById("subjectsBox");
+
+box.innerHTML = "";
+
+let subjects = data[course]?.[dept];
+
+if(subjects){
+subjects.forEach(s=>{
+
+let label = document.createElement("label");
+label.className = "subject-item";
+
+label.innerHTML = `
+<input type="checkbox" name="subjects" value="${s}">
+<span>${s}</span>
+`;
+
+box.appendChild(label);
+
+});
+}
+}
+</script>
+
+{% endblock %}

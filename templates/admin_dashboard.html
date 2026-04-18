@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Admin Dashboard 👨‍💼</h2>
+
+<!-- 🔥 TOP CARDS -->
+<div style="display:flex; gap:20px; flex-wrap:wrap;">
+
+<div class="card">
+<h3>👨‍🎓 Total Students</h3>
+<p>{{ students | default(0) }}</p>
+</div>
+
+<div class="card">
+<h3>👩‍🏫 Total Teachers</h3>
+<p>{{ teachers | default(0) }}</p>
+</div>
+
+</div>
+
+<br>
+
+<!-- 📊 GRAPH -->
+<div class="card">
+<h3>System Overview 📊</h3>
+<canvas id="chart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+// SAFE DATA
+var students = parseInt(box.getAttribute('data-students')) || 0;
+var teachers = parseInt(box.getAttribute('data-teachers')) || 0;
+
+console.log("Students:", students, "Teachers:", teachers);
+// GRAPH
+new Chart(document.getElementById('chart'), {
+    type: 'bar',
+    data: {
+        labels: ['Students', 'Teachers'],
+        datasets: [{
+            label: 'System Data',
+            data: [students, teachers],
+            backgroundColor: ['#6b7aa1','#8ea3c8']
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+
+<br>
+
+<!-- 🚀 QUICK ACTIONS -->
+<div class="card">
+
+<h3>Quick Actions 🚀</h3>
+
+<div style="display:flex; gap:15px; flex-wrap:wrap;">
+
+<a href="/add_student_page">
+<button>➕ Add Student</button>
+</a>
+
+<a href="/add_teacher_page">
+<button>➕Add Teacher</button>
+</a>
+
+<a href="/view_students">
+<button>👨‍🎓 View Students</button>
+</a>
+
+<a href="/view_teachers">
+<button>👩‍🏫 View Teachers</button>
+</a>
+
+<a href="/change_password_page">
+<button>🔐 Change Password</button>
+</a>
+
+<a href="/admin_marks">
+<button>📊 View Marks</button>
+</a>
+
+<a href="/department_summary">
+<button>📊 Department Summary</button>
+</a>
+
+</div>
+
+</div>
+
+{% endblock %}

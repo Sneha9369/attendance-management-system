@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>My Attendance 📅</h2>
+
+<!-- 🔥 SUMMARY CARDS -->
+<div style="display:flex; gap:20px; flex-wrap:wrap;">
+
+<div class="card">
+<h3>Total Subjects</h3>
+<p>{{ data|length }}</p>
+</div>
+
+<div class="card">
+<h3>Overall Attendance</h3>
+<p>
+{% if data|length > 0 %}
+{{ (data | map(attribute=3) | sum / data|length) | round(2) }}%
+{% else %}
+0%
+{% endif %}
+</p>
+</div>
+
+</div>
+
+<br>
+
+<!-- 📊 TABLE -->
+<div class="card">
+<table>
+
+<tr>
+    <th>Subject</th>
+    <th>Total Classes</th>
+    <th>Present</th>
+    <th>Attendance %</th>
+</tr>
+
+{% for row in data %}
+<tr>
+    <td>{{ row[0] }}</td>
+    <td>{{ row[1] }}</td>
+    <td>{{ row[2] }}</td>
+
+    <td>
+        {% if row[3] < 75 %}
+            <span style="color:red; font-weight:bold;">
+                {{ row[3] }}%
+            </span>
+        {% else %}
+            <span style="color:green; font-weight:bold;">
+                {{ row[3] }}%
+            </span>
+        {% endif %}
+    </td>
+</tr>
+{% endfor %}
+
+</table>
+</div>
+
+<br>
+
+<!-- 📈 GRAPH -->
+<div class="card">
+<h3>Attendance Graph 📊</h3>
+<canvas id="chart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+window.onload = function() {
+
+    var subjects = JSON.parse('{{ subjects | default([]) | tojson | safe }}');
+    var marks = JSON.parse('{{ marks | default([]) | tojson | safe }}');
+    console.log("Subjects:", subjects);
+    console.log("Percentages:", percentages);
+
+    var ctx = document.getElementById('chart');
+
+    if(ctx){
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: subjects,
+                datasets: [{
+                    label: 'Attendance %',
+                    data: percentages,
+                    backgroundColor: '#8ea3c8'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                }
+            }
+        });
+    }
+}
+</script>
+
+<br>
+<p>Subjects: {{ data | map(attribute=0) | list }}</p>
+<p>Percentages: {{ data | map(attribute=3) | list }}</p>
+
+<!-- 🚀 ACTION BUTTON -->
+<div class="card">
+
+<a href="/student_dashboard">
+<button>⬅ Back to Dashboard</button>
+</a>
+
+</div>
+
+{% endblock %}

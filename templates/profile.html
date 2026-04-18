@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Student Profile 🎓</h2>
+
+<div class="card">
+
+<img src="{{ url_for('static', filename='uploads/' + (student[6] or 'default.png')) }}"
+     width="150">
+
+<p><b>Name:</b> {{ student[1] }}</p>
+<p><b>Course:</b> {{ student[2] }}</p>
+<p><b>Department:</b> {{ student[3] }}</p>
+
+<p><b>Father Name:</b> {{ student[7] }}</p>
+<p><b>Mother Name:</b> {{ student[8] }}</p>
+<p><b>Contact:</b> {{ student[9] }}</p>
+<p><b>Address:</b> {{ student[10] }}</p>
+</div>
+
+{% endblock %}

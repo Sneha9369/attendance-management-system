@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Student Dashboard 🎓</h2>
+
+<!-- 🔥 PROFILE + WELCOME -->
+<div class="card" style="display:flex; align-items:center; gap:20px;">
+
+<img src="{{ url_for('static', filename='uploads/' + (student[6] or 'default.png')) }}"
+     style="width:80px; height:80px; border-radius:50%; object-fit:cover;">
+
+<div>
+<h3>Welcome, {{ student[1] }} 👋</h3>
+<p>Here is your attendance dashboard</p>
+</div>
+<p id="quoteText" style="
+    margin-top:10px;
+    font-style: italic;
+    color:#444;
+    background:#f0f4ff;
+    padding:12px;
+    border-radius:12px;
+"></p>
+
+<script>
+let text = "{{ quote }}";
+let i = 0;
+
+function typeEffect(){
+    if(i < text.length){
+        document.getElementById("quoteText").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeEffect, 30);
+    }
+}
+typeEffect();
+</script>
+
+</div>
+
+<br>
+
+
+
+<!-- 🔥 TOP CARDS -->
+
+<div style="
+    margin-top:15px;
+    background:#fff4e5;
+    padding:12px;
+    border-radius:12px;
+    font-weight:bold;
+">
+🔥 Keep going Sneha, you’re doing great!
+</div>
+<br>
+<div style="display:flex; gap:15px; margin-top:15px;">
+
+<div class="card" style="padding:10px;">
+📊 Attendance<br>
+<b>75%</b>
+</div>
+
+<div class="card" style="padding:10px;">
+📚 Subjects<br>
+<b>6</b>
+</div>
+
+<div class="card" style="padding:10px;">
+🏆 Status<br>
+<b>Active</b>
+</div>
+
+</div>
+
+<br>
+
+<!-- 📊 TABLE -->
+<div class="card">
+
+{% for row in data %}
+<tr>
+    <td>{{ row[0] }}</td>
+    <td>{{ row[1] }}</td>
+    <td>{{ row[2] if row[2] else 0 }}</td>
+
+    <td>
+    {% if row[1] > 0 %}
+        {{ ((row[2] if row[2] else 0) / row[1] * 100) | round(2) }}%
+    {% else %}
+        0%
+    {% endif %}
+    </td>
+</tr>
+{% endfor %}
+
+</table>
+</div>
+
+<br>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+// ✅ SAFE DATA
+var subjects = JSON.parse('{{ subjects | default([]) | tojson | safe }}');
+var marks = JSON.parse('{{ marks | default([]) | tojson | safe }}');
+// ✅ GRAPH
+if(subjects.length > 0){
+    new Chart(document.getElementById('chart'), {
+        type: 'bar',
+        data: {
+            labels: subjects,
+            datasets: [{
+                label: 'Attendance %',
+                data: percentages,
+                backgroundColor: '#8ea3c8'
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }
+        }
+    });
+}
+</script>
+
+<br>
+
+<!-- 🚀 ACTION BUTTONS -->
+<div class="card">
+
+</p>
+<h3>Quick Actions 🚀</h3>
+
+<div style="display:flex; gap:15px; flex-wrap:wrap;">
+
+<a href="/my_profile">
+<button>👤 My Profile</button>
+</a>
+
+<a href="/my_attendance">
+<button>📅 Attendance</button>
+</a>
+
+<a href="/my_marks">
+<button>📊 Marks</button>
+</a>
+
+<a href="/student_graph">
+<button>📈 Performance</button>
+</a>
+
+</div>
+
+</div>
+
+{% endblock %}

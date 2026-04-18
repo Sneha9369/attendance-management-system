@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="navbar">Search</div>
+
+<div class="container">
+<h3>Search Student</h3>
+<form action="/search_student" method="post">
+    <input type="text" name="student_id" placeholder="Student ID">
+    <button type="submit">Search</button>
+</form>
+
+<h3>Search Teacher</h3>
+<form action="/search_teacher" method="post">
+    <input type="text" name="teacher_id" placeholder="Teacher ID">
+    <button type="submit">Search</button>
+</form>
+</div>
+
+</body>
+</html>

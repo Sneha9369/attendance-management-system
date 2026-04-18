@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Performance 📈</h2>
+
+<div class="card">
+<canvas id="chart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+var subjects = JSON.parse('{{ (subjects or []) | tojson | safe }}');
+var marks = JSON.parse('{{ (marks or []) | tojson | safe }}');
+
+new Chart(document.getElementById('chart'), {
+    type: 'line',   // 🔥 LINE GRAPH
+    data: {
+        labels: subjects,
+        datasets: [{
+            label: 'Marks (Out of 100)',
+            data: marks,
+            tension: 0.3,   // smooth curve
+            fill: false
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true,
+                max: 100   // 🔥 always out of 100
+            }
+        }
+    }
+});
+
+</script>
+
+{% endblock %}

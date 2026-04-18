@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AMS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    Attendance Management System
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+
+{% if session.get('role') == 'admin' %}
+<a href="/admin_dashboard" class="{% if request.path == '/admin_dashboard' %}active{% endif %}">Dashboard</a>
+
+<a href="/add_student_page" class="{% if request.path == '/add_student_page' %}active{% endif %}">Add Student</a>
+
+<a href="/add_teacher_page" class="{% if request.path == '/add_teacher_page' %}active{% endif %}">Add Teacher</a>
+
+<a href="/view_students" class="{% if request.path == '/view_students' %}active{% endif %}">Students</a>
+
+<a href="/view_teachers" class="{% if request.path == '/view_teachers' %}active{% endif %}">Teachers</a>
+
+<a href="/manual_attendance" class="{% if request.path == '/manual_attendance' %}active{% endif %}">Attendance</a>
+
+<a href="/report" class="{% if request.path == '/report' %}active{% endif %}">Report</a>
+
+<a href="/change_password_page" class="{% if request.path == '/change_password_page' %}active{% endif %}">Change Password</a>
+{% endif %}
+
+{% if session.get('role') == 'teacher' %}
+<a href="/teacher_dashboard" class="{% if request.path == '/teacher_dashboard' %}active{% endif %}">Dashboard</a>
+
+<a href="/teacher_profile" class="{% if request.path == '/teacher_profile' %}active{% endif %}">My Profile</a>
+
+<a href="/view_students" class="{% if request.path == '/view_students' %}active{% endif %}">Students</a>
+
+<a href="/manual_attendance" class="{% if request.path == '/manual_attendance' %}active{% endif %}">Attendance</a>
+
+<a href="/add_marks" class="{% if request.path == '/add_marks' %}active{% endif %}">Add Marks 📊</a>
+
+<a href="/report" class="{% if request.path == '/report' %}active{% endif %}">Report</a>
+{% endif %}
+
+{% if session.get('role') == 'student' %}
+<a href="/student_dashboard" class="{% if request.path == '/student_dashboard' %}active{% endif %}">Dashboard</a>
+
+<a href="/my_profile" class="{% if request.path == '/my_profile' %}active{% endif %}">My Profile</a>
+
+<a href="/student_graph" class="{% if request.path == '/student_graph' %}active{% endif %}">Performance</a>
+
+<a href="/my_marks" class="{% if request.path == '/my_marks' %}active{% endif %}">Marks</a>
+
+<a href="/my_attendance" class="{% if request.path == '/my_attendance' %}active{% endif %}">Attendance %</a>
+{% endif %}
+
+<a href="/logout">Logout</a>
+
+</div>
+
+<!-- 🔥 MAIN CONTENT (IMPORTANT) -->
+<div class="main">
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+
+<div style="position:fixed; top:20px; right:20px; z-index:999;">
+
+{% for category, message in messages %}
+
+<div class="alert {{ category }}">
+    {{ message }}
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endif %}
+{% endwith %}
+    {% block content %}{% endblock %}
+</div>
+<script>
+setTimeout(() => {
+    document.querySelectorAll('.alert').forEach(el => el.remove());
+}, 3000);
+</script>
+
+</body>
+</html>

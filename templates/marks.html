@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Marks Overview 📊</h2>
+
+<div class="card">
+
+<table>
+
+<tr>
+<th>Student</th>
+<th>Course</th>
+<th>Department</th>
+<th>Subject</th>
+<th>Marks</th>
+<th>Percentage</th>
+<th>Status</th>
+</tr>
+
+{% for m in data %}
+
+{% set marks = m[-1] | int %}
+
+<tr class="{% if marks < 40 %}fail-row{% endif %}">
+
+<td>{{ m[0] }}</td>
+<td>{{ m[1] }}</td>
+<td>{{ m[2] }}</td>
+<td>{{ m[3] }}</td>
+
+<td>{{ marks }}/100</td>
+<td>{{ marks }}%</td>
+
+<td>
+{% if marks >= 40 %}
+<span style="color:green;">Pass ✅</span>
+{% else %}
+<span style="color:red;">Fail ❌</span>
+{% endif %}
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+{% endblock %}

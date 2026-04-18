@@ -1,0 +1,241 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #dfe9f3, #ffffff);
+}
+
+/* NAVBAR */
+.navbar {
+    background: #6b7aa1;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 22px;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    position: fixed;
+    background: #7b8db3;
+    padding-top: 20px;
+}
+
+.sidebar a {
+    color: white;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background: #dfe6f1;
+    color: #333;
+}
+
+/* MAIN */
+.main {
+    margin-left: 230px;
+    padding: 20px;
+}
+
+/* CARD */
+.card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* INPUT */
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #d0d6e2;
+    background: #f9f9fb;
+}
+
+/* BUTTON */
+button {
+    background: #6b7aa1;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #8ea3c8;
+}
+
+/* MESSAGE */
+.msg {
+    color: #6b7aa1;
+    font-weight: bold;
+}
+
+/* ===== TABLE ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* HEADINGS */
+th {
+    background: #8ea3c8;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* DATA */
+td {
+    padding: 12px;
+    text-align: center;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+}
+
+/* ROW COLORS */
+tr:nth-child(even) {
+    background: #f6f8fc;
+}
+
+/* HOVER */
+tr:hover {
+    background: #eef2f9;
+}
+
+/* DELETE BUTTON */
+.delete-btn {
+    color: #c94c4c;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* TEXT FIX */
+td, th {
+    white-space: nowrap;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .main {
+        margin-left: 0;
+    }
+
+    .card {
+        margin-bottom: 15px;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    input, select, button {
+        width: 100%;
+    }
+}
+
+button {
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+.alert {
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    color: white;
+    font-weight: bold;
+    animation: slideIn 0.5s ease;
+}
+
+.alert.success {
+    background: linear-gradient(45deg, #4CAF50, #81C784);
+}
+
+.alert.error {
+    background: linear-gradient(45deg, #F44336, #E57373);
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.subject-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0;
+    cursor: pointer;
+}
+
+.subject-item input {
+    width: 16px;
+    height: 16px;
+}
+
+.subject-item span {
+    font-size: 15px;
+}
+.sidebar a.active {
+    background-color:#6b7aa1;
+    color: white;
+    border-radius: 8px;
+}
+a:hover {
+    background-color: #ddd;
+    border-radius: 8px;
+}
+.fail-row {
+    background: #ffe5e5;
+}
+.progress-box {
+    background: #eee;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    color: white;
+    padding: 6px;
+    text-align: center;
+    transition: 0.5s;
+}
+
+/* COLORS */
+.green { background: green; }
+.orange { background: orange; }
+.red { background: red; }
+
+.progress-bar {
+    animation: grow 1s ease-in-out;
+}
+
+@keyframes grow {
+    from { width: 0; }
+}

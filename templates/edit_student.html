@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Edit Student ✏</h2>
+
+<div class="card">
+
+<form action="/update_student" method="post">
+
+<input type="hidden" name="student_id" value="{{ student[0] }}">
+
+<label>Name</label>
+<input name="name" value="{{ student[1] }}">
+
+<label>Course</label>
+<input name="course" value="{{ student[2] }}">
+
+<label>Department</label>
+<input name="department" value="{{ student[3] }}">
+
+<label>Section</label>
+<input name="section" value="{{ student[4] }}">
+
+<label>Father Name</label>
+<input name="father_name" value="{{ student[7] }}">
+
+<label>Mother Name</label>
+<input name="mother_name" value="{{ student[8] }}">
+
+<label>Contact</label>
+<input name="contact" value="{{ student[9] }}">
+
+<label>Address</label>
+<input name="address" value="{{ student[10] }}">
+
+<button>Update</button>
+
+</form>
+
+</div>
+
+<br>
+
+<a href="/view_students">
+<button>⬅ Back</button>
+</a>
+
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Add Marks 🧑‍🏫</h2>
+
+<div class="card">
+
+<!-- FILTER FORM -->
+<form method="get" action="/add_marks">
+
+<select name="course">
+<option value="">Select Course</option>
+<option value="BTECH" {% if course=='BTECH' %}selected{% endif %}>BTECH</option>
+<option value="BCA" {% if course=='BCA' %}selected{% endif %}>BCA</option>
+</select>
+
+<select name="dept">
+<option value="">Select Department</option>
+
+<option value="Computer Science" {% if dept=='Computer Science' %}selected{% endif %}>Computer Science</option>
+<option value="Data Science" {% if dept=='Data Science' %}selected{% endif %}>Data Science</option>
+<option value="Artificial Intelligence" {% if dept=='Artificial Intelligence' %}selected{% endif %}>Artificial Intelligence</option>
+
+</select>
+
+<button type="submit">Load Students</button>
+
+</form>
+
+<br>
+
+<!-- MARKS FORM -->
+<form method="post" action="/save_marks">
+
+<select name="subject" required>
+<option value="">Select Subject</option>
+<option>Machine Learning Technique</option>
+<option>Software Engineering</option>
+<option>Software Project Management</option>
+<option>Computer Network</option>
+<option>Python</option>
+<option>Java</option>
+</select>
+
+<br><br>
+
+<table>
+<tr>
+<th>Student Name</th>
+<th>Marks</th>
+</tr>
+
+{% if students %}
+    {% for s in students %}
+    <tr>
+        <td>{{ s[1] }}</td>
+        <td>
+            <input type="number" name="marks_{{ s[0] }}" required>
+        </td>
+    </tr>
+    {% endfor %}
+{% else %}
+<tr>
+<td colspan="2">No Students Found ❌</td>
+</tr>
+{% endif %}
+
+</table>
+
+<br>
+<button type="submit">Save Marks</button>
+
+</form>
+
+</div>
+
+{% endblock %}

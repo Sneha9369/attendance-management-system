@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Teacher Profile 👩‍🏫</h2>
+
+<div class="card">
+
+<img src="{{ url_for('static', filename='uploads/' + t[11]) }}"
+     style="width:120px; border-radius:50%;">
+
+<p><b>ID:</b> {{ t[0] }}</p>
+<p><b>Name:</b> {{ t[1] }}</p>
+<p><b>Course:</b> {{ t[2] }}</p>
+<p><b>Department:</b> {{ t[3] }}</p>
+
+
+<p><b>Contact:</b> {{ t[7] if t[7] else "Not Provided" }}</p>
+<p><b>Address:</b> {{ t[8] if t[8] else "Not Provided" }}</p>
+
+</div>
+
+<a href="/view_teachers">⬅ Back</a>
+
+{% endblock %}

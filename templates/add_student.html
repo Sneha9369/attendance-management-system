@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Add Student</h2>
+
+<div class="card">
+
+<form action="/add_student" method="post" enctype="multipart/form-data">
+<!-- COURSE -->
+<select name="course" id="course" onchange="loadDepartments()">
+<option value="">Select Course</option>
+<option value="BTECH">BTECH</option>
+<option value="BCA">BCA</option>
+</select>
+
+<!-- DEPARTMENT -->
+<select name="department" id="department">
+<option value="">Select Department</option>
+</select>
+
+<input type="text" name="name" placeholder="Student Name" required>
+<input name="father_name" placeholder="Father Name">
+<input name="mother_name" placeholder="Mother Name">
+<input name="contact" placeholder="Contact">
+<input name="address" placeholder="Address">
+
+<input name="username" placeholder="Username" required>
+<input name="password" placeholder="Password" required>
+
+<input type="file" name="photo" accept="image/*" required>
+
+<button>Add Student</button>
+
+</form>
+
+<br>
+<a href="/admin_dashboard">⬅ Back</a>
+
+</div>
+
+<script>
+var data = {
+"BTECH": {
+"Computer Science": [],
+"Data Science": []
+},
+"BCA": {
+"Artificial Intelligence": [],
+"Data Science": []
+}
+};
+
+function loadDepartments(){
+let course = document.getElementById("course").value;
+let dept = document.getElementById("department");
+
+dept.innerHTML = '<option value="">Select Department</option>';
+
+if(data[course]){
+Object.keys(data[course]).forEach(d=>{
+let opt = document.createElement("option");
+opt.value = d;
+opt.text = d;
+dept.appendChild(opt);
+});
+}
+}
+</script>
+
+{% endblock %}

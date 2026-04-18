@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Marks Overview 📊</h2>
+
+<div class="card">
+<table>
+
+<tr>
+<th>Student</th>
+<th>Course</th>
+<th>Department</th>
+<th>Subject</th>
+<th>Marks</th>
+</tr>
+
+{% for m in data %}
+<tr>
+<td>{{ m[0] }}</td>
+<td>{{ m[1] }}</td>
+<td>{{ m[2] }}</td>
+<td>{{ m[3] }}</td>
+<td>{{ m[4] }}</td>
+</tr>
+{% endfor %}
+
+</table>
+</div>
+
+{% endblock %}

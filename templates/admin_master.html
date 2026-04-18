@@ -1,0 +1,26 @@
+@app.route('/add_teacher_page')
+def add_teacher_page():
+    cursor.execute("SELECT * FROM departments")
+    departments = cursor.fetchall()
+
+    cursor.execute("SELECT * FROM subjects")
+    subjects = cursor.fetchall()
+
+    return render_template("add_teacher.html",
+                           departments=departments,
+                           subjects=subjects)
+
+
+@app.route('/add_teacher', methods=['POST'])
+def add_teacher():
+    name = request.form['name']
+    department = request.form['department']
+    subject = request.form['subject']
+
+    teacher_id = generate_teacher_id()
+
+    cursor.execute("INSERT INTO teachers VALUES (?,?,?,?)",
+                   (teacher_id, name, department, subject))
+    conn.commit()
+
+    return f"Teacher Added Successfully. ID = {teacher_id}"

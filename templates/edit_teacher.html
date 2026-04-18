@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Edit Teacher 👩‍🏫</h2>
+
+<div class="card">
+
+<form action="/update_teacher" method="post">
+
+<!-- 🔐 Hidden ID -->
+<input type="hidden" name="teacher_id" value="{{ teacher[0] }}">
+
+<label>Name</label>
+<input type="text" name="name" value="{{ teacher[1] }}" required>
+
+<label>Department</label>
+<input type="text" name="department" value="{{ teacher[2] }}" required>
+
+<label>Subject</label>
+<input type="text" name="subject" value="{{ teacher[3] }}" required>
+
+<br><br>
+
+<button type="submit">Update Teacher</button>
+
+</form>
+
+</div>
+
+<br>
+
+<!-- 🔙 BACK BUTTON -->
+<a href="/view_teachers">
+<button>⬅ Back</button>
+</a>
+
+{% endblock %}

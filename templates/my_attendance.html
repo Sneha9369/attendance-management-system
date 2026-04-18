@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>My Attendance 📅</h2>
+
+<!-- 🔥 OVERALL -->
+{% set total_all = 0 %}
+{% set present_all = 0 %}
+
+{% for row in data %}
+{% set total_all = total_all + row[1] %}
+{% set present_all = present_all + row[2] %}
+{% endfor %}
+
+{% set overall = (present_all / total_all * 100) if total_all else 0 %}
+
+<div class="card" style="text-align:center;">
+
+<h3>Overall Attendance</h3>
+
+{{ overall|round(1) }}%
+</h1>
+
+<p>
+{% if overall >= 75 %}
+🔥 Excellent!
+{% elif overall >= 50 %}
+⚠️ Improve a bit
+{% else %}
+🚨 Low Attendance
+{% endif %}
+</p>
+
+</div>
+
+<br>
+
+<!-- 🔥 SUBJECT LIST -->
+<div class="card">
+
+<table>
+
+<tr>
+<th>Subject</th>
+<th>Total</th>
+<th>Present</th>
+<th>Status</th>
+</tr>
+
+{% for row in data %}
+
+{% set per = (row[2] / row[1] * 100) if row[1] else 0 %}
+
+<tr>
+
+<td>{{ row[0] }}</td>
+<td>{{ row[1] }}</td>
+<td>{{ row[2] }}</td>
+
+<td>
+{% if per >= 75 %}
+🟢 Good ({{ per|round(1) }}%)
+{% elif per >= 50 %}
+🟠 Average ({{ per|round(1) }}%)
+{% else %}
+🔴 Low ({{ per|round(1) }}%)
+{% endif %}
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+{% if not data %}
+<div class="card" style="text-align:center;">
+😔 No attendance data found
+</div>
+{% endif %}
+
+{% endblock %}

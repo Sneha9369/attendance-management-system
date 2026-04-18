@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>My Performance 📊</h2>
+
+<div class="card">
+    <canvas id="chart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+// ✅ SAFE DATA (no crash)
+var subjects = JSON.parse('{{ subjects | default([]) | tojson | safe }}');
+var marks = JSON.parse('{{ marks | default([]) | tojson | safe }}');
+
+// ✅ GRAPH
+new Chart(document.getElementById('chart'), {
+    type: 'line',
+    data: {
+        labels: subjects,
+        datasets: [{
+            label: 'Marks',
+            data: marks,
+            borderColor: '#6b7aa1',
+            fill: false
+        }]
+    }
+});
+</script>
+
+{% endblock %}

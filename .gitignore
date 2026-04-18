@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+*.pkl
+
+.vscode/
+.env
+
+# database
+*.db
+
+# uploads (personal images)
+static/uploads/
+
+# OS files
+.DS_Store
+Thumbs.db
